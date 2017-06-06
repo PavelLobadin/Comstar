@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Comstar.Client.Views.ItemDetailPage"
+             Title="{Binding Title}">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Save" Clicked="Save_Clicked" />
+	</ContentPage.ToolbarItems>
+	<StackLayout Spacing="20" Padding="15">
+		<Label Text="{Binding Item.Text}" FontSize="Medium"/>
+		<Label Text="{Binding Item.Description}" FontSize="Small"/>
+		<Picker SelectedIndex="{Binding Item.Status}" HorizontalOptions="FillAndExpand">
+			<Picker.Items>
+				<x:String>Новое</x:String>
+				<x:String>В работе (назначена)</x:String>
+				<x:String>В работе (запланирована)</x:String>
+				<x:String>Ожидание решения</x:String>
+				<x:String>Решена</x:String>
+				<x:String>Закрыто</x:String>
+			</Picker.Items>
+		</Picker>
+	</StackLayout>
+</ContentPage>

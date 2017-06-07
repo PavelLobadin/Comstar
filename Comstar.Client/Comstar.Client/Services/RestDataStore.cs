@@ -56,7 +56,15 @@ namespace Comstar.Client.Services
 
 		public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
 		{
-			return await ApiAsync<IEnumerable<Item>>("api/items");
+			var client = CreateHttpClient();
+			var response = await client.GetAsync("api/items");
+			if (response.IsSuccessStatusCode)
+			{
+				var stream = await response.Content.ReadAsStreamAsync();
+				return JsonSerializer.Create().Deserialize<IEnumerable<Item>>(new JsonTextReader(new StreamReader(stream)));
+			}
+
+			return new List<Item>();
 		}
 
 		public Task<bool> PullLatestAsync()
@@ -91,19 +99,6 @@ namespace Comstar.Client.Services
 			}
 
 			isInitialized = true;
-		}
-
-		private static async Task<T> ApiAsync<T>(string requestUri)
-		{
-			var client = CreateHttpClient();
-			var response = await client.GetAsync(requestUri);
-			if (response.IsSuccessStatusCode)
-			{
-				var stream = await response.Content.ReadAsStreamAsync();
-				return JsonSerializer.Create().Deserialize<T>(new JsonTextReader(new StreamReader(stream)));
-			}
-
-			return default(T);
 		}
 
 		private static HttpClient CreateHttpClient()

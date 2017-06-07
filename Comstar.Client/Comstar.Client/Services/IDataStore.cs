@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Comstar.Client.Models;
 
 namespace Comstar.Client.Services
 {
@@ -14,5 +15,6 @@ namespace Comstar.Client.Services
 		Task InitializeAsync();
 		Task<bool> PullLatestAsync();
 		Task<bool> SyncAsync();
+		Task<IEnumerable<ChatRecord>> GetChatRecordsAsync(bool forceRefresh = false);
 	}
 }

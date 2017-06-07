@@ -70,6 +70,11 @@ namespace Comstar.Client.Services
 			return Task.FromResult(true);
 		}
 
+		public Task<IEnumerable<ChatRecord>> GetChatRecordsAsync(bool forceRefresh = false)
+		{
+			throw new NotImplementedException();
+		}
+
 		public async Task InitializeAsync()
 		{
 			if (isInitialized)

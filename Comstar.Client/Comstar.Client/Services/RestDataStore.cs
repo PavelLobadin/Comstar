@@ -67,6 +67,19 @@ namespace Comstar.Client.Services
 			return new List<Item>();
 		}
 
+		public async Task<IEnumerable<ChatRecord>> GetChatRecordsAsync(bool forceRefresh = false)
+		{
+			var client = CreateHttpClient();
+			var response = await client.GetAsync("api/chat");
+			if (response.IsSuccessStatusCode)
+			{
+				var stream = await response.Content.ReadAsStreamAsync();
+				return JsonSerializer.Create().Deserialize<IEnumerable<ChatRecord>>(new JsonTextReader(new StreamReader(stream)));
+			}
+
+			return new List<ChatRecord>();
+		}
+
 		public Task<bool> PullLatestAsync()
 		{
 			return Task.FromResult(true);

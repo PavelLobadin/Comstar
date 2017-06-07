@@ -104,7 +104,7 @@ namespace Comstar.Client.Services
 		private static HttpClient CreateHttpClient()
 		{
 			HttpClient client = new HttpClient();
-			client.BaseAddress = new Uri("http://10.0.2.2:51629");
+			client.BaseAddress = new Uri("http://192.168.1.35:5000");
 			client.MaxResponseContentBufferSize = 256000;
 			return client;
 		}

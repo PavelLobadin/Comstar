@@ -18,7 +18,8 @@ namespace Comstar.Server
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
-                .Build();
+								.UseUrls("http://0.0.0.0:5000")
+								.Build();
 
             host.Run();
         }
